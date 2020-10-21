@@ -25,7 +25,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/instaloadeR)](https://CRAN.R-project.org/package=instaloadeR)
 <!-- badges: end --><!-- badges: end -->
 
-The goal of us2020election is to provide a tidy way have access to the transcripts of speeches given by various US politician in the context of the 2020 US Presidential Election. The text of transcripts have been scraped from [rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts). Some other information such as location and type of speech have been manually added to the dataset.
+The goal of us2020election is to provide a tidy way to have access to the transcripts of speeches given by various US politicians in the context of the 2020 US Presidential Election. Transcripts have been scraped from [rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts). Some other information, such as location and type of speech, have been manually added to the dataset. The dataset has the following columns:
+
+`speaker`: Who gave the speech
+
+`title`: a title or a description of speech
+
+`text`: the transcript of the speech
+
+`location`: the location or the platform where the speech was give
+
+`type`: type of speech (e.g., campaign speech, interview or debate)
 
 ## Installation
 
@@ -47,26 +57,25 @@ library(ggthemes)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
 
 ```{r cars}
 glimpse(us_election_speeches)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
 
-You can also embed plots, for example:
+
 
 ```{r pressure, echo = FALSE}
 us_election_speeches %>% 
   mutate(date = lubridate::mdy(date),
-         month = lubridate::month(date)) %>% 
+         month = lubridate::month(date,abbr = T,label = T)) %>% 
   separate_rows(speaker,sep = ', ') %>% 
   count(speaker,month,sort = TRUE) %>% 
-  filter(n>2, speaker %in% c('Joe Biden', 'Donald Trump')) %>% 
-  ggplot(aes(x = month,y = n,color = speaker)) +
-  geom_line() +
-labs(title = 'Number of Speeches given by Joe Biden and Trump in 2020',color = '') +
+  filter( speaker %in% c('Joe Biden', 'Donald Trump')) %>% 
+  ggplot(aes(x = as.factor(month),y = n,fill = speaker)) +
+  geom_col(position = 'dodge') +
+labs(title = 'Number of Campaign Speeches Given by Joe Biden and Trump in 2020',color = '') +
   theme_fivethirtyeight() +
   theme(plot.title = element_text(size = 15),
         legend.position = 'top')

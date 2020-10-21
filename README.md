@@ -11,13 +11,23 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/instaloadeR)](https://CRAN.R-project.org/package=instaloadeR)
 <!-- badges: end --><!-- badges: end -->
 
-The goal of us2020election is to provide a tidy way have access to the
-transcripts of speeches given by various US politician in the context of
-the 2020 US Presidential Election. The text of transcripts have been
+The goal of us2020election is to provide a tidy way to have access to
+the transcripts of speeches given by various US politicians in the
+context of the 2020 US Presidential Election. Transcripts have been
 scraped from
 [rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts).
-Some other information such as location and type of speech have been
-manually added to the dataset.
+Some other information, such as location and type of speech, have been
+manually added to the dataset. The dataset has the following columns:
+
+`speaker`: Who gave the speech
+
+`title`: a title or a description of speech
+
+`text`: the transcript of the speech
+
+`location`: the location or the platform where the speech was give
+
+`type`: type of speech (e.g., campaign speech, interview or debate)
 
 ## Installation
 
@@ -39,9 +49,6 @@ library(ggthemes)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
 ``` r
 glimpse(us_election_speeches)
 #> Rows: 269
@@ -53,10 +60,5 @@ glimpse(us_election_speeches)
 #> $ location <chr> "Macon, Georgia", "Southfield ,Michigan", "Fort Myers, Flo...
 #> $ type     <chr> "Campaign Speech", "Campaign Speech", "Campaign Speech", "...
 ```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
 
 <img src="man/figures/README-pressure-1.png" width="100%" />
