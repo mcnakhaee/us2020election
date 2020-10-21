@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 ```
 
 # us2020election
-
 <!-- badges: start -->
 
 [![Lifecycle:
