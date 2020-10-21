@@ -75,7 +75,7 @@ us_election_speeches %>%
   filter( speaker %in% c('Joe Biden', 'Donald Trump')) %>% 
   ggplot(aes(x = as.factor(month),y = n,fill = speaker)) +
   geom_col(position = 'dodge') +
-labs(title = 'Number of Campaign Speeches Given by Joe Biden and Trump in 2020',color = '') +
+labs(title = "Joe Biden and Trump's Election Speeches in 2020",fill = '') +
   theme_fivethirtyeight() +
   theme(plot.title = element_text(size = 15),
         legend.position = 'top')
