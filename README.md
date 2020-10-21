@@ -11,10 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/instaloadeR)](https://CRAN.R-project.org/package=instaloadeR)
 <!-- badges: end --><!-- badges: end -->
 
-The goal of us2020election is to provide a tidy way to have access to
-the transcripts of speeches given by various US politicians in the
-context of the 2020 US Presidential Election. Transcripts have been
-scraped from
+The goal of us2020election is to provide a tidy way to access to the
+transcripts of speeches given by various US politicians in the context
+of the 2020 US Presidential Election. Transcripts have been scraped from
 [rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts).
 Some other information, such as location and type of speech, have been
 manually added to the dataset. The dataset has the following columns:
@@ -61,4 +60,19 @@ glimpse(us_election_speeches)
 #> $ type     <chr> "Campaign Speech", "Campaign Speech", "Campaign Speech", "...
 ```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+``` r
+us_election_speeches %>% 
+  mutate(date = lubridate::mdy(date),
+         month = lubridate::month(date,abbr = T,label = T)) %>% 
+  separate_rows(speaker,sep = ', ') %>% 
+  count(speaker,month,sort = TRUE) %>% 
+  filter( speaker %in% c('Joe Biden', 'Donald Trump')) %>% 
+  ggplot(aes(x = as.factor(month),y = n,fill = speaker)) +
+  geom_col(position = 'dodge') +
+labs(title = "Joe Biden and Trump's Election Speeches in 2020",fill = '') +
+  theme_fivethirtyeight() +
+  theme(plot.title = element_text(size = 15),
+        legend.position = 'top')
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
