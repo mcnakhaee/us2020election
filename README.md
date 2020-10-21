@@ -5,45 +5,37 @@
 
 <!-- badges: start -->
 
-<!-- badges: end -->
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/instaloadeR)](https://CRAN.R-project.org/package=instaloadeR)
+<!-- badges: end --><!-- badges: end -->
 
-The goal of us2020election is to …
+The goal of us2020election is to provide a tidy way have access to the
+transcripts of speeches given by various US politician in the context of
+the 2020 US Presidential Election. The text of transcripts have been
+scraped from
+[rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts).
+Some other information such as location and type of speech have been
+manually added to the dataset.
 
 ## Installation
 
-You can install the released version of us2020election from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `us2020election`with:
 
 ``` r
+install.packages("remotes")
 remotes::install_github("mcnakhaee/us2020election")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("mcnakhaee/us2020election")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to use the datase:
 
 ``` r
 library(us2020election)
 library(tidyverse)
-#> Warning: package 'tidyverse' was built under R version 3.6.3
-#> -- Attaching packages --------------------------------------------------------------- tidyverse 1.3.0 --
-#> v ggplot2 3.3.2     v purrr   0.3.3
-#> v tibble  3.0.1     v dplyr   1.0.2
-#> v tidyr   1.0.2     v stringr 1.4.0
-#> v readr   1.3.1     v forcats 0.4.0
-#> Warning: package 'ggplot2' was built under R version 3.6.3
-#> Warning: package 'tibble' was built under R version 3.6.3
-#> Warning: package 'dplyr' was built under R version 3.6.3
-#> -- Conflicts ------------------------------------------------------------------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
+library(ggthemes)
 ## basic example code
 ```
 
@@ -68,6 +60,3 @@ up-to-date.
 You can also embed plots, for example:
 
 <img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!

@@ -7,6 +7,8 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
@@ -16,31 +18,32 @@ knitr::opts_chunk$set(
 # us2020election
 
 <!-- badges: start -->
-<!-- badges: end -->
 
-The goal of us2020election is to ...
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/instaloadeR)](https://CRAN.R-project.org/package=instaloadeR)
+<!-- badges: end --><!-- badges: end -->
+
+The goal of us2020election is to provide a tidy way have access to the transcripts of speeches given by various US politician in the context of the 2020 US Presidential Election. The text of transcripts have been scraped from [rev.com](https://www.rev.com/blog/transcript-category/2020-election-transcripts). Some other information such as location and type of speech have been manually added to the dataset.
 
 ## Installation
 
-You can install the released version of us2020election from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `us2020election `with:
 
 ```{r eval= FALSE}
+install.packages("remotes")
 remotes::install_github("mcnakhaee/us2020election")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("mcnakhaee/us2020election")
-```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to use the datase:
 
 ```{r example}
 library(us2020election)
 library(tidyverse)
+library(ggthemes)
 ## basic example code
 ```
 
@@ -55,7 +58,19 @@ You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-da
 You can also embed plots, for example:
 
 ```{r pressure, echo = FALSE}
-plot(pressure)
+us_election_speeches %>% 
+  mutate(date = lubridate::mdy(date),
+         month = lubridate::month(date)) %>% 
+  separate_rows(speaker,sep = ', ') %>% 
+  count(speaker,month,sort = TRUE) %>% 
+  filter(n>2, speaker %in% c('Joe Biden', 'Donald Trump')) %>% 
+  ggplot(aes(x = month,y = n,color = speaker)) +
+  geom_line() +
+labs(title = 'Number of Speeches given by Joe Biden and Trump in 2020',color = '') +
+  theme_fivethirtyeight() +
+  theme(plot.title = element_text(size = 15),
+        legend.position = 'top')
+  
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+
