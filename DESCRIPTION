@@ -1,6 +1,6 @@
 Package: us2020election
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Muhammad",
            family = "Chenariyan Nakhaee",
